@@ -50,8 +50,6 @@ console.log("Customer's stay period:", timeStayed);
 let greeting = `Hello ${customer.firstName}! Welcome to Sleep Tite Motel, where you can rest your weary head, and be sure to sleep tite!`;
 console.log(greeting);
 
-let address = `${customer.mailingAddress.street}, ${customer.mailingAddress.city}, ${customer.mailingAddress.province}, ${customer.mailingAddress.postal}, ${customer.mailingAddress.country}`;
-
 let html = `
   <ul>
     <center><h1>${greeting}</h1></center>
