@@ -10,7 +10,6 @@
 import FormatValues
 from datetime import datetime
 import time
-import os
 import sys
 
 # Define Constants / Default Values
@@ -119,12 +118,29 @@ def save_invoice_data(cust_first_name, cust_last_name, address, city, province, 
             f.write(f"Monthly Payment Amount: {FormatValues.FDollar2(monthly_payment_cost)}\n")
         f.write(f"Total Insurance Premium: {FormatValues.FDollar2(total_insurance_premium)}\n")
         f.write(f"Total Cost: {FormatValues.FDollar2(total_cost)}\n")
+        
+        # Emulate invoice saving processing time and display
+        for _ in range(5):  # Change to control no. of 'blinks'
+            print('Saving Invoice data ...', end='\r')
+            time.sleep(.2)  # To create the blinking effect
+            sys.stdout.write('\033[2K\r')  # Clears the entire line and carriage returns
+            time.sleep(.2)
+
+        # Wait inbetween invoice and claims saving processes
+        time.sleep(0.5)
 
         # Try to write each claim data
         if claims:
             f.write("\nClaims:\n")
             for claim in claims:
                 f.write(f"Claim No: {claim[0]}, Claim Date: {claim[1]}, Amount: ${FormatValues.FDollar2(claim[2])}\n")
+
+            # Emulate claims saving processing time and display
+            for _ in range(len(claims)):  # Change to control no. of 'blinks'
+                print('Saving Claim data ...', end='\r')
+                time.sleep(.2)  # To create the blinking effect
+                sys.stdout.write('\033[2K\r')  # Clears the entire line and carriage returns
+                time.sleep(.2)
 
     #Display save confirmation and update policy no
     print("\nPolicy data has been saved.")
@@ -257,11 +273,8 @@ while True:
     # Calculations
     if num_cars_insured == 1:
         insurance_premium = BASIC_PREMIUM
-    elif num_cars_insured > 1:
-        insurance_premium = BASIC_PREMIUM + (BASIC_PREMIUM * num_cars_insured * EXTRA_CAR_DISCOUNT)
     else:
-        print("The input for number cars insured is Incorrect. Try program again")
-
+        insurance_premium = BASIC_PREMIUM + (BASIC_PREMIUM * num_cars_insured * EXTRA_CAR_DISCOUNT)
 
     if extra_liability == "Y":
         extra_liability_costs = num_cars_insured * EXTRA_LIABILITY_COST
@@ -278,13 +291,9 @@ while True:
     else:
         optional_loaner_cost = 0
 
-
     total_extra_cost = extra_liability_costs + optional_glass_cost + optional_loaner_cost
-
     total_insurance_premium = insurance_premium + total_extra_cost
-
     HST_cost = total_insurance_premium * HST_RATE
-
     total_cost = total_insurance_premium + HST_cost
 
     if payment_option == "F":
@@ -305,21 +314,15 @@ while True:
         next_payment_date = datetime(year=CURR_DATE.year + 1, month=1, day=1)
     else:
         next_payment_date = datetime(year=CURR_DATE.year, month=CURR_DATE.month + 1, day=1)
-
-
-    cust_full_name =  SPACE_INDENT + cust_first_name + cust_last_name
-    address_display = SPACE_INDENT + address
-    area_display = SPACE_INDENT + city + ", " + province + " " + postal_code
-
+    
     # Formatting dates
     invoice_date = CURR_DATE.strftime('%Y-%m-%d')
     next_payment_date_str = next_payment_date.strftime('%Y-%m-%d')
 
-    # Correctly format monetary values using FormatValues (assuming it has methods like FDollar2)
+    # Correctly format monetary values 
     total_cost_formatted = FormatValues.FDollar2(total_cost)
     total_insurance_premium_formatted = FormatValues.FDollar2(total_insurance_premium)
     HST_cost_formatted = FormatValues.FDollar2(HST_cost)
-
 
     # Print Receipt
     print(FULL_LINE_BREAK)
@@ -362,9 +365,8 @@ while True:
             print(f"Down Payment: {FormatValues.FDollar2(down_pay_amount)}")
             remaining_cost = total_cost - down_pay_amount
 
-            monthly_payment_cost = remaining_cost / 8  # Assuming 8 months payment period
+            monthly_payment_cost = remaining_cost / 8  
             print(f"Remaining Monthly Payment: {FormatValues.FDollar2(monthly_payment_cost)} for 8 months")
-
 
     print(f"Next Payment Date: {next_payment_date_str}")
     print(FULL_LINE_BREAK)
@@ -378,10 +380,13 @@ while True:
         print(f"{claim[0]:<11s} {claim[1]:<16s} {FormatValues.FDollar2(claim[2]):>18}")
     print(FULL_LINE_BREAK)
 
+
+    # Call save_invoice_data to save the input values, calculatins and claims
     save_invoice_data(cust_first_name, cust_last_name, address, city, province, postal_code, phone_num,
                       num_cars_insured, extra_liability, optional_glass_cov, optional_loaner_car, payment_option,
                       down_pay_amount, monthly_payment_cost, total_insurance_premium, total_cost, claims)
 
+    # Ask if user wants to repeat program for another invoice
     while True:
         Continue = input("Do you want to Process Another Sale (Y / N)?: ").upper()
         if Continue != "Y" and Continue != "N":
