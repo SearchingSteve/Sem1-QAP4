@@ -1,4 +1,3 @@
-
 # Description: Invoice Calculator for One Stop Insurance Company
 # Take in customer data, calculate invoice values, and then display formatted receipt
 
@@ -23,18 +22,16 @@ HST_RATE = 0.15
 MONTHLY_PROCESSING_FEE = 39.99
 CURR_DATE = datetime.now()
 
-
 # Define Accepted Provinces
 accepted_provinces = ["AB", "BC", "MB", "NB", "NL", "NS", "ON", "PE", "QC", "SK", "NT", "NU", "YT"]
 
 # Define Accepted Pay Periods
-accepted_payment_options = ["F","M","DP"]
+accepted_payment_options = ["F", "M", "DP"]
 
 # Page format constants
 RECIEPT_WIDTH = 47
 FULL_LINE_BREAK = "-" * RECIEPT_WIDTH
 SPACE_INDENT = " " * 5
-
 
 
 # Define Program Functions
@@ -70,9 +67,9 @@ def ProvincePrefix(province):
     else:
         return
 
+
 # Function to check if postal code is valid Canadian format
 def CDNPostalCodeValidation(postal_code):
-
     # Ensure no spaces
     postal_code = postal_code.replace(" ", "")
     # Before Checking structure, check length
@@ -91,7 +88,6 @@ def CDNPostalCodeValidation(postal_code):
 def save_invoice_data(cust_first_name, cust_last_name, address, city, province, postal_code, phone_num,
                       num_cars_insured, extra_liability, optional_glass_cov, optional_loaner_car, payment_option,
                       down_pay_amount, monthly_payment_cost, total_insurance_premium, total_cost, claims):
-
     # Define NEXT_POLICY_NO as global to give access throughout script
     global NEXT_POLICY_NO
 
@@ -113,18 +109,18 @@ def save_invoice_data(cust_first_name, cust_last_name, address, city, province, 
         f.write(f"Glass Coverage: {optional_glass_cov}\n")
         f.write(f"Loaner Car Option: {optional_loaner_car}\n")
         f.write(f"Payment Option: {payment_option}\n")
-        if payment_option == "DP":
+        if payment_option != "F":
             f.write(f"Down Payment Amount: {FormatValues.FDollar2(down_pay_amount)}\n")
             f.write(f"Monthly Payment Amount: {FormatValues.FDollar2(monthly_payment_cost)}\n")
         f.write(f"Total Insurance Premium: {FormatValues.FDollar2(total_insurance_premium)}\n")
         f.write(f"Total Cost: {FormatValues.FDollar2(total_cost)}\n")
-        
+
         # Emulate invoice saving processing time and display
         for _ in range(5):  # Change to control no. of 'blinks'
             print('Saving Invoice data ...', end='\r')
-            time.sleep(.2)  # To create the blinking effect
+            time.sleep(.5)  # To create the blinking effect
             sys.stdout.write('\033[2K\r')  # Clears the entire line and carriage returns
-            time.sleep(.2)
+            time.sleep(.5)
 
         # Wait inbetween invoice and claims saving processes
         time.sleep(0.5)
@@ -133,7 +129,7 @@ def save_invoice_data(cust_first_name, cust_last_name, address, city, province, 
         if claims:
             f.write("\nClaims:\n")
             for claim in claims:
-                f.write(f"Claim No: {claim[0]}, Claim Date: {claim[1]}, Amount: ${FormatValues.FDollar2(claim[2])}\n")
+                f.write(f"Claim No: {claim[0]}, Claim Date: {claim[1]}, Amount: {FormatValues.FDollar2(claim[2])}\n")
 
             # Emulate claims saving processing time and display
             for _ in range(len(claims)):  # Change to control no. of 'blinks'
@@ -142,14 +138,14 @@ def save_invoice_data(cust_first_name, cust_last_name, address, city, province, 
                 sys.stdout.write('\033[2K\r')  # Clears the entire line and carriage returns
                 time.sleep(.2)
 
-    #Display save confirmation and update policy no
+    # Display save confirmation and update policy no
     print("\nPolicy data has been saved.")
     NEXT_POLICY_NO += 1
 
 
 # User Inputs
 while True:
-    cust_first_name =  input("Enter Customer first name ('End' to quit): ").title()
+    cust_first_name = input("Enter Customer first name ('End' to quit): ").title()
     if cust_first_name == "End":
         break
     elif cust_first_name == "":
@@ -224,7 +220,6 @@ while True:
         else:
             break
 
-
     while True:
         optional_glass_cov = input("Enter extra glass coverage? (Y or N): ").upper()
         if optional_glass_cov != "Y" and optional_glass_cov != "N":
@@ -233,8 +228,6 @@ while True:
         else:
             break
 
-
-
     while True:
         optional_loaner_car = input("Optional Loaner car? (Y or N): ").upper()
         if optional_loaner_car != "Y" and optional_loaner_car != "N":
@@ -242,7 +235,6 @@ while True:
             continue
         else:
             break
-
 
     while True:
         payment_option = input("Enter payment options: F(Full), M(Monthly), DP(Down Pay): ").upper()
@@ -256,9 +248,9 @@ while True:
             break
 
     # Template claims: [0:Claim number, 1:claim date, 2:Claim amount of all previous claims for the customer]
-    claim1 = ["1000", "Jan 01,2000", 1000]
-    claim2 = ["1001", "Feb 01,2001", 2000]
-    claim3 = ["1002", "Mar 01,2002", 3000]
+    claim1 = ["1000", "2000-01-01", 1000]
+    claim2 = ["1001", "2001-01-01", 2000]
+    claim3 = ["1002", "2002-01-01", 3000]
 
     # Claim storage and input for recording claims
     claims = [claim1, claim2, claim3]
@@ -266,9 +258,28 @@ while True:
         claim_number = input("Enter a claim number OR type 'END' to finish: ")
         if claim_number.upper() == 'END':
             break
-        claim_date = input("Enter claim date (YYYY-MM-DD): ")
-        claim_amount = float(input("Enter claim amount: "))
-        claims.append((claim_number, claim_date, claim_amount))
+        elif not claim_number.isdigit():
+            print("Data Entry Error - claim no must be a digit")
+            continue
+
+        while True:
+            claim_date_input = input("Enter claim date (YYYY-MM-DD): ")
+            try:
+                claim_date = datetime.strptime(claim_date_input, "%Y-%m-%d")
+                formatted_claim_date = FormatValues.FDateS(claim_date)
+                break
+            except ValueError:
+                print("Data Entry Error - invalid claim date")
+
+
+        while True:
+            claim_amount = float(input("Enter claim amount: "))
+            if claim_amount <= 0:
+                print("Data Entry Error - claim amount must be greater than 0")
+            else:
+                break
+        claims.append((claim_number, formatted_claim_date, claim_amount))
+
 
     # Calculations
     if num_cars_insured == 1:
@@ -303,7 +314,7 @@ while True:
 
     elif payment_option == "M":
         down_pay_amount = 0
-        monthly_payment_cost = (total_cost + MONTHLY_PROCESSING_FEE)/8
+        monthly_payment_cost = (total_cost + MONTHLY_PROCESSING_FEE) / 8
         payment_option_cost = monthly_payment_cost
     else:
         monthly_payment_cost = (total_cost + MONTHLY_PROCESSING_FEE - down_pay_amount) / 8
@@ -314,12 +325,12 @@ while True:
         next_payment_date = datetime(year=CURR_DATE.year + 1, month=1, day=1)
     else:
         next_payment_date = datetime(year=CURR_DATE.year, month=CURR_DATE.month + 1, day=1)
-    
-    # Formatting dates
-    invoice_date = CURR_DATE.strftime('%Y-%m-%d')
-    next_payment_date_str = next_payment_date.strftime('%Y-%m-%d')
 
-    # Correctly format monetary values 
+    # Formatting dates
+    invoice_date = FormatValues.FDateS(CURR_DATE)
+    next_payment_date_str = FormatValues.FDateS(next_payment_date)
+
+    # Correctly format monetary values
     total_cost_formatted = FormatValues.FDollar2(total_cost)
     total_insurance_premium_formatted = FormatValues.FDollar2(total_insurance_premium)
     HST_cost_formatted = FormatValues.FDollar2(HST_cost)
@@ -332,7 +343,8 @@ while True:
 
     print("Customer Info:")
     print(f"{cust_first_name} {cust_last_name}")
-    print(f"Address: {address}, {city}, {province_prefixed}, {postal_code}")
+    print(f"Address: {address}")
+    print(f"{city}, {province_prefixed}, {postal_code}")
     print(f"Phone: {phone_num}")
     print(FULL_LINE_BREAK)
 
@@ -365,7 +377,7 @@ while True:
             print(f"Down Payment: {FormatValues.FDollar2(down_pay_amount)}")
             remaining_cost = total_cost - down_pay_amount
 
-            monthly_payment_cost = remaining_cost / 8  
+            monthly_payment_cost = remaining_cost / 8
             print(f"Remaining Monthly Payment: {FormatValues.FDollar2(monthly_payment_cost)} for 8 months")
 
     print(f"Next Payment Date: {next_payment_date_str}")
@@ -380,8 +392,7 @@ while True:
         print(f"{claim[0]:<11s} {claim[1]:<16s} {FormatValues.FDollar2(claim[2]):>18}")
     print(FULL_LINE_BREAK)
 
-
-    # Call save_invoice_data to save the input values, calculatins and claims
+    # Call save_invoice_data to save the input values, calculations and claims
     save_invoice_data(cust_first_name, cust_last_name, address, city, province, postal_code, phone_num,
                       num_cars_insured, extra_liability, optional_glass_cov, optional_loaner_car, payment_option,
                       down_pay_amount, monthly_payment_cost, total_insurance_premium, total_cost, claims)
@@ -396,9 +407,11 @@ while True:
     if Continue == "N":
         break
 
-
-
 # Issues:
 ## The save_invoice_data will save the template claims for each invoice.
 ## This is not what would be wanted in a real scenario, rather to have the claims list start empty
 ## and add another function to save claims to an invoice (save_claims_to_invoice).
+
+## Upon next time running will overwrite previous saved invoice files. This is due to the next policy no default
+## variable not being updated in the python script. To fix could try to iterate through directory that contains invoices,
+## get the everthing after the _ (Policy digits) and add one to this to properly specify the next ordered invoice.
