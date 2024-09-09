@@ -1,15 +1,39 @@
 # QAP-4-Files-SC
-## This is a README.md file for QAP 4
-### QAP 4 contains 4 parts
-- 1 Python
-- 2 Github
-- 3 ERD
-- 4 JAVA
 
- 1) The python will contain a python script that will create an invoice for the One Stop Insurance Company
- It will take in inputs and then use them to calculate certain values, then display a well formatted invoice receipt.
+## Overview
+This repository contains the work for QAP 4, which is divided into four distinct parts. Each part demonstrates different aspects of software development, including Python scripting, GitHub version control, entity-relationship diagram (ERD) design, and Java programming.
 
- 2) The Github will be this repository which will contain part 1,3,4. This will make the code accessible to clone and grade.
- 3) The ERD will be a Diagram portraying to a motel's information, and how each section works with another (***This will not be provided in the repository.***)
- 4) The Java will be a script which will create a customer of the motel as an object, perform methods, and display certian information about the customer and their stay at the hotel as template literals.
+### Parts Overview
+1. **Python Script**  
+   A Python script designed to create an invoice for the One Stop Insurance Company. The script takes various inputs, calculates values (such as totals and taxes), and outputs a well-formatted invoice receipt. This demonstrates knowledge of Python, including user input, data processing, and output formatting.
 
+2. **GitHub Repository**  
+   This repository will house all the files related to QAP 4 (excluding the ERD). It allows for easy access to the code for grading, review, or cloning. GitHub serves as the version control system, demonstrating the use of branches, commits, and repository management.
+
+3. **ERD (Entity-Relationship Diagram)**  
+   An ERD representing a motel’s information system, showing how different components interact. This diagram illustrates the relationships between entities like guests, rooms, and bookings.  
+   *Note: The ERD is not provided within this repository.*
+
+4. **Java Program**  
+   A Java application that models a motel customer as an object, demonstrating object-oriented programming concepts. The program includes methods that perform operations on the customer data and outputs key information about their stay using template literals.
+
+## Repository Structure
+- **Python/**: Contains the Python script for the One Stop Insurance Company invoice generator.
+- **Java/**: Contains the Java program that models a motel customer and performs various operations.
+- **ERD/**: A placeholder or reference for the motel’s ERD (though the actual diagram is not included in the repository).
+
+## Usage
+1. **Python Script**:  
+   To run the Python invoice generator, navigate to the `Python/` folder and run the script using a Python interpreter:
+   ```bash
+   python invoice_generator.py
+   ```
+2. **Java Program**:
+The Java code can be compiled and run using any standard Java compiler. Navigate to the Java/ folder and compile the .java file:
+```bash
+javac Customer.java
+java Customer
+```
+## License
+
+This repository is intended for educational purposes only. Please refer to the LICENSE file for more information on usage restrictions.
