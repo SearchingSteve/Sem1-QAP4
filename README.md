@@ -1,4 +1,4 @@
-# QAP-4-Files-SC
+# Sem1-QAP4
 
 ## Overview
 This repository contains the work for QAP 4, which is divided into four distinct parts. Each part demonstrates different aspects of software development, including Python scripting, GitHub version control, entity-relationship diagram (ERD) design, and Java programming.
@@ -18,22 +18,27 @@ This repository contains the work for QAP 4, which is divided into four distinct
    A Java application that models a motel customer as an object, demonstrating object-oriented programming concepts. The program includes methods that perform operations on the customer data and outputs key information about their stay using template literals.
 
 ## Repository Structure
-- **Python/**: Contains the Python script for the One Stop Insurance Company invoice generator.
-- **Java/**: Contains the Java program that models a motel customer and performs various operations.
-- **ERD/**: A placeholder or reference for the motel’s ERD (though the actual diagram is not included in the repository).
+- **Part1-Python/**: Contains the Python script for the One Stop Insurance Company invoice generator.
+- **Part2-Java/**: Contains the Java program that models a motel customer and performs various operations.
+- **Part3-ERD/**: A placeholder or reference for the motel’s ERD (though the actual diagram is not included in the repository).
 
 ## Usage
 1. **Python Script**:  
-   To run the Python invoice generator, navigate to the `Python/` folder and run the script using a Python interpreter:
+   To run the Python invoice generator, navigate to the `Part1-Python/` folder and run the script using a Python interpreter:
    ```bash
    python invoice_generator.py
    ```
 2. **Java Program**:
-The Java code can be compiled and run using any standard Java compiler. Navigate to the Java/ folder and compile the .java file:
+The Java code can be compiled and run using any standard Java compiler. Navigate to the `Part2-Java/` folder and compile the .java file:
 ```bash
 javac Customer.java
 java Customer
 ```
 ## License
 
-This repository is intended for educational purposes only. Please refer to the LICENSE file for more information on usage restrictions.
+This project is provided for **personal use only**. Redistribution, modification, or commercial use in any form is strictly prohibited without prior written permission from the author.
+
+For detailed license terms, refer to the [LICENSE](./LICENSE.md) file.
+
+## Author
+- **[Stephen Crocker](https://github.com/SearchingSteve)** 
