@@ -8,11 +8,11 @@ This repository contains the work for QAP 4, which is divided into four distinct
    A Python script designed to create an invoice for the One Stop Insurance Company. The script takes various inputs, calculates values (such as totals and taxes), and outputs a well-formatted invoice receipt. This demonstrates knowledge of Python, including user input, data processing, and output formatting.
 
 2. **GitHub Repository**  
-   This repository will house all the files related to QAP 4 (excluding the ERD). It allows for easy access to the code for grading, review, or cloning. GitHub serves as the version control system, demonstrating the use of branches, commits, and repository management.
+   This repository will house all the files related to QAP 4. It allows for easy access to the code for grading, review, or cloning. GitHub serves as the version control system, demonstrating the use of branches, commits, and repository management.
 
 3. **ERD (Entity-Relationship Diagram)**  
-   An ERD representing a motel’s information system, showing how different components interact. This diagram illustrates the relationships between entities like guests, rooms, and bookings.  
-   *Note: The ERD is not provided within this repository.*
+   The Entity-Relationship Diagram (ERD) for the motel’s information system is provided as an Excel file for easy viewing and editing. You can find it here: [ERD.xlsx](./Part3-ERD/ERD.xlsx). This diagram illustrates the relationships between entities such as guests, rooms, and bookings.
+
 
 4. **Java Program**  
    A Java application that models a motel customer as an object, demonstrating object-oriented programming concepts. The program includes methods that perform operations on the customer data and outputs key information about their stay using template literals.
@@ -20,7 +20,7 @@ This repository contains the work for QAP 4, which is divided into four distinct
 ## Repository Structure
 - **Part1-Python/**: Contains the Python script for the One Stop Insurance Company invoice generator.
 - **Part2-Java/**: Contains the Java program that models a motel customer and performs various operations.
-- **Part3-ERD/**: A placeholder or reference for the motel’s ERD (though the actual diagram is not included in the repository).
+- **Part3-ERD/**: Contains the ERD diagram in Excel format (`ERD.xlsx`).  
 
 ## Usage
 1. **Python Script**:  
@@ -41,4 +41,4 @@ This project is provided for **personal use only**. Redistribution, modification
 For detailed license terms, refer to the [LICENSE](./LICENSE.md) file.
 
 ## Author
-- **[Stephen Crocker](https://github.com/SearchingSteve)** 
+- **[SearcingSteve](https://github.com/SearchingSteve)** 
