@@ -11,7 +11,7 @@ This repository contains the work for QAP 4, which is divided into four distinct
    This repository will house all the files related to QAP 4. It allows for easy access to the code for grading, review, or cloning. GitHub serves as the version control system, demonstrating the use of branches, commits, and repository management.
 
 3. **ERD (Entity-Relationship Diagram)**  
-   The Entity-Relationship Diagram (ERD) for the motel’s information system is provided as an Excel file for easy viewing and editing. You can find it here: [ERD.xlsx](./Part3-ERD/ERD.xlsx). This diagram illustrates the relationships between entities such as guests, rooms, and bookings.
+   The Entity-Relationship Diagram (ERD) for the motel’s information system is provided as an Excel file for easy viewing and editing. You can find it here: [ERD.xlsx](/ERD.xlsx). This diagram illustrates the relationships between entities such as guests, rooms, and bookings.
 
 
 4. **Java Program**  
